@@ -12,7 +12,7 @@ export default function App() {
   return (
     <div className="app">
       <div className="app-header">
-        <h1><span className="dot"></span> Community Hero</h1>
+        <h1><span className="dot"></span> Local Hero</h1>
         <p>Hyperlocal civic issue reporting · Bhubaneswar</p>
       </div>
       <div className="tabs">
