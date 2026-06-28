@@ -1,6 +1,7 @@
 import { MapContainer, TileLayer, CircleMarker, Popup } from 'react-leaflet'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import API from '../config'
 
 const COLOR = {
   pothole: '#E24B4A', water: '#378ADD',
@@ -15,7 +16,7 @@ export default function IssueMap() {
   const [issues, setIssues] = useState([])
 
   useEffect(() => {
-    axios.get('http://localhost:8000/issues/')
+    axios.get(`${API}/issues/`)
       .then(r => setIssues(r.data))
   }, [])
 
