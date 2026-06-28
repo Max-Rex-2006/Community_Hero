@@ -8,33 +8,14 @@ app = FastAPI(title="Community Hero API")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:5173",
-        "https://ubiquitous-space-giggle-jjq9p6vg9rq52q7g-5173.app.github.dev"
+    "http://localhost:5173",
+    "http://127.0.0.1:5173"
     ],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
 )
 
 @app.get("/")
 def root():
     return {"message": "Community Hero API is running"}
 
+app.include_router(issues_router)
 app.include_router(ai_router)
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "https://ubiquitous-space-giggle-jjq9p6vg9rq52q7g-5173.app.github.dev"
-    ],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-@app.get("/")
-def root():
-    return {"message": "Community Hero API is running"}
-
-app.include_router(issues_router)  # ← add this line
