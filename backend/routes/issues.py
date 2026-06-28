@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, UploadFile, File, Form
 from sqlalchemy.orm import Session
 from database import get_db
 from models import Issue
+import os
 
 router = APIRouter(prefix="/issues", tags=["issues"])
 
@@ -34,8 +35,8 @@ def get_issue(issue_id: int, db: Session = Depends(get_db)):
 
 @router.post("/")
 async def create_issue(
-    title: str = Form(...),
-    description: str = Form(...),
+    title: str = Form("No title"),
+    description: str = Form("No description"),
     latitude: float = Form(...),
     longitude: float = Form(...),
     ward: str = Form(...),
@@ -45,6 +46,7 @@ async def create_issue(
 ):
     image_url = None
     if image:
+        os.makedirs("uploads", exist_ok=True)  # ← add this line
         contents = await image.read()
         path = f"uploads/{image.filename}"
         with open(path, "wb") as f:
