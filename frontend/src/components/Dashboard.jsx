@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
 import axios from 'axios'
+import API from '../config'
 
 export default function Dashboard() {
   const [stats, setStats] = useState(null)
 
   useEffect(() => {
-    axios.get('http://localhost:8000/issues/stats/summary')
+    axios.get(`${API}/issues/stats/summary`)
       .then(r => setStats(r.data))
   }, [])
 
