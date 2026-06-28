@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from routes.ai import router as ai_router
 
 app = FastAPI(title="Community Hero API")
 
@@ -14,3 +15,5 @@ app.add_middleware(
 @app.get("/")
 def root():
     return {"message": "Community Hero API is running"}
+
+app.include_router(ai_router)
