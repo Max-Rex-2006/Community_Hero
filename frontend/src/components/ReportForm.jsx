@@ -30,7 +30,10 @@ export default function ReportForm({ onSuccess }) {
 
   const handleSubmit = async () => {
     const fd = new FormData()
-    Object.entries(form).forEach(([k, v]) => fd.append(k, v))
+    fd.append('title', form.title || 'Civic issue')
+    fd.append('description', form.description || 'Reported by citizen')
+    fd.append('ward', form.ward || 'Unknown')
+    fd.append('reporter_name', form.reporter_name || 'Anonymous')
     fd.append('latitude', loc?.lat || 20.2961)
     fd.append('longitude', loc?.lng || 85.8245)
     if (image) fd.append('image', image)
